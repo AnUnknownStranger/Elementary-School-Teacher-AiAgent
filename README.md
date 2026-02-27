@@ -26,5 +26,4 @@ This module builds the Retrieval-Augmented Generation (RAG) knowledge base for t
 python3 -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
- 
-
+streamlit run server.py 
