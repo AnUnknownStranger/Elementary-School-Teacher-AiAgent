@@ -1,0 +1,17 @@
+# PDF processing
+pypdf>=3.0.0
+cryptography>=3.1
+
+# Vector store
+faiss-cpu>=1.7.4
+
+# Embeddings
+sentence-transformers>=2.2.2
+transformers>=4.40.0
+
+# LangChain (community version for FAISS + embeddings)
+langchain-core>=0.2.0
+langchain-community>=0.2.0
+
+# Utilities
+tqdm>=4.60.0
