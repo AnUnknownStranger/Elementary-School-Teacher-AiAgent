@@ -42,7 +42,7 @@ class MathAgent:
                 "3. Do NOT perform calculations for them.\n"
                 "### FORMATTING RULES ###\n"
                 "• Use standard LaTeX formatting wrapped in single dollar signs ($...$).\n"
-                "• Example: $\\frac{1}{2} \\times \\frac{3}{4}$\n\n"
+                "• Example: $\\frac{{1}}{{2}} \\times \\frac{{3}}{{4}}$\n\n"
                 "5. Only confirm the final result AFTER the student provides it.\n\n"
                 "TEXTBOOK CONTEXT:\n{context}"
             )),
