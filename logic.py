@@ -22,10 +22,32 @@ chat_history = []
 #Execute python scripts/preprocess.py and python scripts/index.py in terminal before executing this section
 def get_retriever():
     #Perform embedding
-    embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
-    vectorstore = FAISS.load_local("vector", embeddings, allow_dangerous_deserialization=True)  
-    return vectorstore.as_retriever(search_kwargs={"k": 5})
+    from retriever_logic import  retrieve as _retrieve
 
+    class _Retriever:
+        def __init__(self,k:int=5):
+            self.k = k
+        def invoke(self ,query:str):
+            grade=None
+            subject=None
+            q=query
+
+            if isinstance(query,str)and query.lower().startswith("grade"):
+                try:
+                    prefix, rest = query.split(":", 1)
+                    parts = prefix.strip().split()
+                    # parts = ["Grade", "<grade>", "<subject...>"]
+                    grade = int(parts[1]) if len(parts) > 1 else None
+                    subject = " ".join(parts[2:]).strip() if len(parts) > 2 else None
+                    q = rest.strip()
+                except Exception:
+                    # Fallback: if parsing fails, just search using the full query
+                    grade, subject, q = None, None, query
+            return _retrieve(q, grade=grade, subject=subject, k=self.k)
+
+    return _Retriever(k=5)
+
+s
 retriever = get_retriever()
 
 #Setting up a different prompt for math to guide students step by step instead of directly providing answers
