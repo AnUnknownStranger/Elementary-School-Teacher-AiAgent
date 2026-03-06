@@ -35,7 +35,7 @@ class MathAgent:
             ("system", (
                 "You are a Grade {grade} Math Socratic Tutor.\n"
                 "### CRITICAL RULE: DO NOT PROVIDE DIRECT ANSWERS OR FINAL NUMERICAL RESULTS. ###\n"
-                "If you state the answer explicitly, you have failed your role.\n\n"
+                "If you state the answer directly, you have failed task.\n\n"
                 "YOUR GOAL: Act as a coach. Guide the student through ONE small step at a time.\n"
                 "1. Identify where the student currently is in the process.\n"
                 "2. Explain how they should approach the NEXT step (method, not result).\n"
@@ -61,7 +61,7 @@ class EnglishAgent:
                 "INSTRUCTIONS:\n"
                 "• Explain literary elements (theme, character, setting, plot) in simple language.\n"
                 "• Define difficult vocabulary words and use them in new example sentences.\n"
-                "• Provide a short model example (e.g., a sample sentence or paragraph).\n\n"
+                "• Provide a short example (e.g., a sample sentence or paragraph).\n\n"
                 "TEXTBOOK CONTEXT:\n{context}"
             )),
             MessagesPlaceholder(variable_name="history"),
@@ -114,10 +114,9 @@ class GeneralAgent:
         self.prompt = ChatPromptTemplate.from_messages([
             ("system", (
                 "You are a helpful Grade {grade} School Assistant.\n"
-                "1. Explain the concept using a relatable story.\n"
-                "2. Define any tricky vocabulary words.\n"
-                "3. Give a clear final summary in 2-3 sentences.\n"
-                "4. Suggest 3 'Think about it' questions.\n\n"
+                "1. Define any tricky vocabulary words.\n"
+                "2. Give a clear final summary in 2-3 sentences.\n"
+                "3. Suggest 3 questions for the students to further consider.\n\n"
                 "TEXTBOOK CONTEXT:\n{context}"
             )),
             MessagesPlaceholder(variable_name="history"),
@@ -126,15 +125,11 @@ class GeneralAgent:
         self.chain = self.prompt | llm | StrOutputParser()
     def handle(self, question,context,grade, history):
         return self.chain.invoke({"question": question, "context": context,"grade": grade, "history": history})
+
 classifier_prompt = ChatPromptTemplate.from_template(
-    "Based on the student question. Detect the subject (Math, Science, Social Studies or English) "
+    "Based on the student question. Detect the subject (Math, Science, Social Studies or English) or is it a general question"
     "and the grade level (1, 2, 3, 4, or 5).\n"
-    "Return JSON only: {{\"subject\": \"...\", \"grade\": ...}}\n"
-    "Question: {question}"
-)
-classifier_prompt = ChatPromptTemplate.from_template(
-    "Based on the student question. Detect the subject (Math, Science, Social Studies or English) "
-    "and the grade level (1, 2, 3, 4, or 5).\n"
+    "Remeber that the location is USA based!!!\n"
     "Return JSON only: {{\"subject\": \"...\", \"grade\": ...}}\n"
     "Question: {question}"
 )
@@ -165,4 +160,6 @@ def Route_Question(student_question, history_list):
         "response": response,
         "sources": referenced_sources
     }
+
+
 
