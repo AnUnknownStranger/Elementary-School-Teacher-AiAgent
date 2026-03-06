@@ -10,8 +10,13 @@ sentence-transformers>=2.2.2
 transformers>=4.40.0
 
 # LangChain (community version for FAISS + embeddings)
-langchain-core>=0.2.0
-langchain-community>=0.2.0
+langchain
+langchain-core
+langchain-community
+langchain-text-splitters
+langchain-huggingface
+langchain-deepseek
 
 # Utilities
 tqdm>=4.60.0
+streamlit
