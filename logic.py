@@ -47,7 +47,7 @@ def get_retriever():
 
     return _Retriever(k=5)
 
-s
+
 retriever = get_retriever()
 
 #Setting up a different prompt for math to guide students step by step instead of directly providing answers
@@ -62,10 +62,12 @@ class MathAgent:
                 "1. Identify where the student currently is in the process.\n"
                 "2. Explain how they should approach the NEXT step (method, not result).\n"
                 "3. Do NOT perform calculations for them.\n"
-                "### FORMATTING RULES ###\n"
-                "• Use standard LaTeX formatting wrapped in single dollar signs ($...$).\n"
-                "• Example: $\\frac{{1}}{{2}} \\times \\frac{{3}}{{4}}$\n\n"
+                "### MATH FORMATTING ###\n"
+                "• Always wrap math in $...$\n"
+                "• Example: $\\frac{{1}}{{2}} + \\frac{{1}}{{4}}$\n"
+                "• Use standard LaTeX formatting.\n\n"
                 "5. Only confirm the final result AFTER the student provides it.\n\n"
+                "6. When the student has the final result, stop with the questions and recap what he does\n\n"
                 "TEXTBOOK CONTEXT:\n{context}"
             )),
             MessagesPlaceholder(variable_name="history"),

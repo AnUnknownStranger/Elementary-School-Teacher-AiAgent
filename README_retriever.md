@@ -7,9 +7,9 @@
 ## How to test retrieval logic
 * Make sure retriever_logic.py, evaluation.py, and vector exist
 * How to test retriever
-   make sure test_retriever.py and retriever_logic are under the same folder
+   make sure test_retriever.py and retrieve_logic are under the same folder
    * run:
-        - **python test_retriever.py**
+        - **python test_retrieve.py**
 ## How to test evaluation
 * run evaluation.py
    make sure there is a eval_set.jsonl under the same folder

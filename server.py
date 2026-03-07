@@ -7,12 +7,8 @@ st.title("Elementary School Teaching Assistant")
 st.caption("Grades 1-5 | Math, Science, English, Social Studies")
 
 def render_math(text):
-    parts = re.split(r'(\$.*?\$)', text)
-    for part in parts:
-        if part.startswith('$') and part.endswith('$'):
-            st.latex(part.strip('$'))
-        else:
-            st.markdown(part)
+    text = re.sub(r'(\\frac\{.*?\}\{.*?\})', r'$\1$', text)
+    st.markdown(text)
 
 if "messages" not in st.session_state:
     st.session_state.messages = []

@@ -26,7 +26,7 @@ except ImportError:
 
 @dataclass
 class RetrievalConfig:
-    vector_dir: str = "../vector"  # Directory where FAISS index is stored
+    vector_dir: str = "vector"  # Directory where FAISS index is stored
     embed_model: str = "sentence-transformers/all-MiniLM-L6-v2"
 
     # Retrieve a larger candidate pool before filtering and re-ranking
