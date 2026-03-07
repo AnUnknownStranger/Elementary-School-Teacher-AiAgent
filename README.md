@@ -29,3 +29,7 @@ pip install -r requirements.txt
 python scripts/preprocess.py
 python scripts/index.py
 streamlit run server.py 
+
+### How to use the system
+wait for the UI to be load up on streamlit
+once everything is loaded, user can start typing in inputs
